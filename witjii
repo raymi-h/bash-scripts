@@ -1,0 +1,72 @@
+#! /usr/bin/bash
+
+# Whatever It Takes, Just Install It
+
+update-the-things(){
+	echo -en "\n\n--- Updating the Things! ---\n\n"
+	if yes | sudo pacman -Syu
+    then
+         date +"%s" > /home/raymi/.lastSysUpdate
+    fi
+	yes | sudo aura -Au
+}
+
+install-the-things(){
+	echo -en "\n\n--- Installing the Things! ---\n\n"
+	if   yes | sudo pacman -Sy		$@
+	then
+		:
+	elif yes | sudo aura -A			$@
+	then
+		:
+	else
+		echo -e "\n\n\tnothing worked..."
+		echo "¯\_(ツ)_/¯"
+	fi
+}
+
+update-the-mirrors(){
+	echo -en "\n\n--- Updating the Mirrors!---\n\n"
+	sudo reflector -c US -l 100 -f 20 --save /etc/pacman.d/mirrorlist
+}
+
+refresh-the-keys(){
+	echo -en "\n\n--- Refreshing the PGP Keys! ---\n\n"
+	sudo pacman-key --init
+	sudo pacman-key --populate archlinux
+}
+force-database-sync(){
+	echo -en "\n\n--- Force-syncing the Package Database! ---\n\n"
+	sudo pacman -Syy
+}
+
+packages=($@)
+packages=${packages[@]:1}
+
+
+if [[ $1 == -*h* || $1 != -* ]]
+then
+echo -e "\n\nWhatever It Takes, Just Install It\n\nUSAGE:\n\t\twitjii [opts] [packages]\n\ninstalls / updates [packages] using any means necesary.\n\nOPTIONS:\n\t-h\tPrints this Help message.\n\t-i\tInstall [packages]\n\t-f\tUses reFlector to renew mirrors\n\t-u\tUpdate all packages on the system.\n\t-c\tForCefully synC the package database\n\t-k\tRefresh PGP Keys\n"
+fi 
+
+if [[ $1 == -*f* ]]
+then
+	update-the-mirrors
+fi
+if [[ $1 == -*k* ]]
+then
+	refresh-the-keys
+fi
+if [[ $1 == -*c* ]]
+then
+	force-database-sync
+fi
+if [[ $1 == -*u* ]]
+then
+	update-the-things
+fi
+if [[ $1 == -*i* ]]
+then
+	install-the-things $packages
+fi
+

@@ -1,0 +1,23 @@
+#! /usr/bin/bash
+
+playVid(){
+
+nolist="$(echo "$1" | cut -f 1 -d "&")"
+
+if mpv --pause --loop=inf  --ytdl-format=best[height=720]  --cache-secs $(youtube-dl --get-duration "$nolist") "$nolist" 
+then
+ :
+elif [[ $1 == *crunchyroll* ]]
+then
+echo "detected anime"
+mpv --buffer-size 4096 --pause --sid=auto --slang=eng,en --loop=inf "$1"
+else
+ mpv --ytdl-format=best[height=720] --ytdl-raw-options buffer-size=4096 --pause --loop=inf "$1" 
+fi
+
+}
+
+if ! playVid $1 &> ~/.yt-log
+then
+    notify-send "yt has failed."
+fi

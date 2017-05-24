@@ -1,0 +1,23 @@
+#! /usr/bin/bash
+
+PATHTOTHISFILE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/music"
+MUSICDIR="/home/raymi/media/sound/music"
+MUSICFILE="/home/raymi/.music-list"
+DEFAULTFILE="/home/raymi/.music-list"
+PLAYLISTDIR="/home/raymi/media/sound/playlist/"
+
+case $1 in
+"scan") music norm; echo -n "Scanning $MUSICDIR for music... "; find $MUSICDIR -type f > $MUSICFILE; echo "Done!" ;;
+"play") mpv --no-video --msg-level=all=no,statusline=status --term-status-msg='${playlist-pos-1}/${playlist-count} [${time-pos}/${length}] ${percent-pos}%\n' --playlist=$MUSICFILE ;;
+"shuf") echo -n "Shuffling music list... "; shuf -o $MUSICFILE $MUSICFILE; echo "Done!";;
+"find") echo -n "Searching for files... "; find $MUSICDIR -type f -name "$2" > $MUSICFILE; echo "Done!" ;;
+"loop") mpv --no-video --loop=inf --playlist=$(readlink -f $MUSICFILE) ;;
+"file") touch $2; sed -i "5s+.*+\MUSICFILE=\"$(readlink -f $2)\"+" $PATHTOTHISFILE;;
+"plus") echo -n "Searching for files to append... "; find $MUSICDIR -type f -name "$2" >> $MUSICFILE; echo "Done!" ;;
+"norm") sed -i "5s+.*+\MUSICFILE=\"$(readlink -f $DEFAULTFILE)\"+" $PATHTOTHISFILE;;
+"echo") cat -b $MUSICFILE;;
+"list") touch "${PLAYLISTDIR}${2}"; sed -i "5s+.*+\MUSICFILE=\"$(readlink -f ${PLAYLISTDIR}${2})\"+" $PATHTOTHISFILE;;
+"copy") cp $MUSICFILE ${PLAYLISTDIR}${2}; music list $2;;
+"edit") vim $MUSICFILE ;;
+"grep") ls $MUSICDIR | grep -E "$2" > $MUSICFILE ;;
+esac

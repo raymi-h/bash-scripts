@@ -1,0 +1,22 @@
+#! /usr/bin/bash
+
+while [ true ]; do
+
+echo -en "\e[1;37m0\tStartX\e[0m\n1\tBash\n2\tExit\n3\tReboot\n\n> "
+read Choice
+
+if [ "$Choice" == '' ]
+then
+Choice='0'
+fi
+
+case $Choice in
+0) startx;;
+1) exec bash;;
+2) exit;;
+3) shutdown -r now;;
+"cow") cat ~/misc/asciicow; sleep 1s;;
+
+esac
+reset
+done

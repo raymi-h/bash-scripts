@@ -1,0 +1,39 @@
+#! /usr/bin/bash
+
+filename="$(hostname)"
+
+echo "Starting backup to Amazon Cloud Drive. This will probably take a while."
+
+acdcli sync
+
+echo "backup of media:"
+
+	acdcli ul /home/raymi/media/sound/music/*.mp3 /music
+	acdcli ul /home/raymi/media/video/* /video
+	acdcli ul /home/raymi/media/images/* /images
+	acdcli ul /home/raymi/media/books/* /books
+	acdcli ul /home/raymi/media/iso/* /iso	
+
+echo "backup of bin:";							acdcli ul /home/raymi/bin								/$filename
+echo "backup of code:";							acdcli ul /home/raymi/code								/$filename
+echo "backup of projects:";						acdcli ul /home/raymi/projects							/$filename
+echo "backup of dwm:";							acdcli ul /home/raymi/dwm								/$filename
+echo "backup of resume:";						acdcli ul /home/raymi/resume							/$filename
+echo "backup of yearUp:";						acdcli ul /home/raymi/yearUp							/$filename
+echo "backup of .config:";						acdcli ul /home/raymi/.config							/$filename
+echo "backup of anime/cartoon progress list:";	acdcli ul /home/raymi/anime-cartoon-progress			/$filename
+	acdcli ul /home/raymi/anime-cartoon-progress /
+echo "backup of important documents:";			acdcli ul /home/raymi/important-documents				/$filename
+
+echo "backup of various dotfiles:"
+acdcli ul /home/raymi/.bash*		/$filename
+acdcli ul /home/raymi/.xinitrc		/$filename
+acdcli ul /home/raymi/.Xresources	/$filename
+
+echo "backup of... \"stuff\"" &&	acdcli ul /home/.stuff	/$filename
+acdcli ul /home/.stuff/images/photos/* /stuff
+acdcli ul /home/.stuff/images/art/* /stuff 
+acdcli ul /home/.stuff/html5/* /stuff
+
+
+echo "backup to Amazon Cloud Drive has completed."
