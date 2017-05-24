@@ -1,6 +1,8 @@
-#! /usr/bin/bash
+#! /usr/bin/env bash
+
+
 while true
 do
-eval "${@:2}"
-sleep $1s
+    eval "${@:2}"
+    sleep $1s
 done

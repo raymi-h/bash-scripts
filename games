@@ -1,47 +1,52 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
+
 
 shopt -s extglob
 
+
 if [ $# == 0 ]
 then
-echo -e "Type a number to select a game:\n"
-echo -e " r\tRandom game\n 0\tExit (default)\n 1\tMinecraft\n 2\tHack, Slash, Loot\n 3\tKerbal Space Program\n 4\tMark of the Ninja\n 5\tFactorio (Demo)\n 6\tA Virus Named Tom\n 7\tParanautical Activity\n 8\tFaster Than Light: Advanced Edition\n 9\tCrawl\n10\tCortex Command\n11\tPOWDER\n12\tPokémon Insurgence\n13\tPokémon Showdown\n14\tPokemon Black (Nuzlock)\n15\tMegabyte Punch\n16\tNot Tetris 2\n17\tDuelyst\n\n"
+    echo -e "Type a number to select a game:\n"
+    echo -e " r\tRandom game\n 0\tExit (default)\n 1\tMinecraft\n 2\tHack, Slash, Loot\n 3\tKerbal Space Program\n 4\tMark of the Ninja\n 5\tFactorio (Demo)\n 6\tA Virus Named Tom\n 7\tParanautical Activity\n 8\tFaster Than Light: Advanced Edition\n 9\tCrawl\n10\tCortex Command\n11\tPOWDER\n12\tPokémon Insurgence\n13\tPokémon Showdown\n14\tPokemon Black (Nuzlock)\n15\tMegabyte Punch\n16\tNot Tetris 2\n17\tDuelyst\n\n"
 
-echo -n "> "
-read Choice
+    echo -n "> "
+    read Choice
 else
-Choice="$@"
+    Choice="$@"
 fi
 
 
 if [ "$Choice" == 'r' ]
 then
-let "choice = $RANDOM % 12 +1"
+    let "choice = $RANDOM % 12 +1"
 fi
 
 if [ "$Choice" == '' ]
 then
-Choice=0
+    Choice=0
 fi
 
+
 case $Choice in
- 0) exit ;;
- 1|[Mm]inecraft)																			java -jar /home/raymi/media/games/minecraft/Minecraft.jar ;;
- 2|[Hh]ack*( )[Ss]lash*( )[Ll]oot)															/home/raymi/media/games/hack-slash-loot/lin/HackSlashLoot ;;
- 3|[Kk]erbal*( )[Ss]pace*( )[Pp]rogram|ksp|KSP)												/home/raymi/media/games/ksp/KSP_linux/KSP.x86_64 ;;
- 4|[Mm]ark*( )[Oo]f*( )[Tt]he*( )[Nn]inja)													/home/raymi/media/games/mark-of-the-ninja/bin/ninja-bin64 ;;
- 5|[Ff]actorio)																				/home/raymi/media/games/factorio/factorio/bin/x64/factorio ;;
- 6|[Aa]*( )[Vv]irus*( )[Nn]amed*( )[Tt][Oo][Mm])											/home/raymi/media/games/a-virus-named-tom/game/AVirusNamedTOM ;;
- 7|[Pp]aranautical*( )[Aa]ctivity)															/home/raymi/media/games/paranautical-activity/Linux/Paranautical\ Activity.x86 ;;
- 8|[Ff]aster*( )[Tt]han*( )[Ll]ight|FTL|ftl)												cd /home/raymi/media/games/ftl/FTL/; ./FTL ;;
- 9|[Cr]awl)																					/home/raymi/media/games/crawl/Crawl.x86_64 ;;
-10|[Cc]ortex*( )[Cc]ommand)																	/home/raymi/media/games/cortex-command/game/CortexCommand ;;
-11|[Pp][Oo][Ww][Dd][Ee][Rr])																/home/raymi/media/games/POWDER/powder117/powder;;
-12|[Pp]ok[ée]mon*( )[Ii]nsurgence)															wine /home/raymi/media/games/pokemon-insurgence/Pokemon\ Insurgence\ 1.1.5/Game.exe;;
-13|[Pp]ok[eé]mon*( )[Ss]howdown|[Ss]howdown|[Pp][Ss])										firefox --new-window "play.pokemonshowdown.com";;
-14|[Pp]ok[eé]mon*( )[Bb]lack|[Nn]uzlock|[Bb]lack*( )[Nn]uzlock|[Pp]ok[eé]mon*( )[Nn]uzlock)	desmume /home/raymi/media/games/emulation/pokemon-black/nuzlock.nds;;
-15|[Mm]egabyte*( )[Pp]unch)																	cd /home/raymi/media/games/megabyte-punch/; ./MegabytePunch.x86;;
-16|[Nn]ot*( )[Tt]etris|[Nn]ot*( )[Tt]etris*( )2)											cd /home/raymi/media/games/not-tetris/; love07 Not\ Tetris\ 2.love;;
-17|[Dd]uelyst)																				duelyst 2> /dev/null;;
+    0) exit ;;
+    1|[Mm]inecraft)																			java -jar /home/raymi/media/games/minecraft/Minecraft.jar ;;
+    2|[Hh]ack*( )[Ss]lash*( )[Ll]oot)															/home/raymi/media/games/hack-slash-loot/lin/HackSlashLoot ;;
+    3|[Kk]erbal*( )[Ss]pace*( )[Pp]rogram|ksp|KSP)												/home/raymi/media/games/ksp/KSP_linux/KSP.x86_64 ;;
+    4|[Mm]ark*( )[Oo]f*( )[Tt]he*( )[Nn]inja)													/home/raymi/media/games/mark-of-the-ninja/bin/ninja-bin64 ;;
+    5|[Ff]actorio)																				/home/raymi/media/games/factorio/factorio/bin/x64/factorio ;;
+    6|[Aa]*( )[Vv]irus*( )[Nn]amed*( )[Tt][Oo][Mm])											/home/raymi/media/games/a-virus-named-tom/game/AVirusNamedTOM ;;
+    7|[Pp]aranautical*( )[Aa]ctivity)															/home/raymi/media/games/paranautical-activity/Linux/Paranautical\ Activity.x86 ;;
+    8|[Ff]aster*( )[Tt]han*( )[Ll]ight|FTL|ftl)												cd /home/raymi/media/games/ftl/FTL/; ./FTL ;;
+    9|[Cr]awl)																					/home/raymi/media/games/crawl/Crawl.x86_64 ;;
+    10|[Cc]ortex*( )[Cc]ommand)																	/home/raymi/media/games/cortex-command/game/CortexCommand ;;
+    11|[Pp][Oo][Ww][Dd][Ee][Rr])																/home/raymi/media/games/POWDER/powder117/powder;;
+    12|[Pp]ok[ée]mon*( )[Ii]nsurgence)															wine /home/raymi/media/games/pokemon-insurgence/Pokemon\ Insurgence\ 1.1.5/Game.exe;;
+    13|[Pp]ok[eé]mon*( )[Ss]howdown|[Ss]howdown|[Pp][Ss])										firefox --new-window "play.pokemonshowdown.com";;
+    14|[Pp]ok[eé]mon*( )[Bb]lack|[Nn]uzlock|[Bb]lack*( )[Nn]uzlock|[Pp]ok[eé]mon*( )[Nn]uzlock)	desmume /home/raymi/media/games/emulation/pokemon-black/nuzlock.nds;;
+    15|[Mm]egabyte*( )[Pp]unch)																	cd /home/raymi/media/games/megabyte-punch/; ./MegabytePunch.x86;;
+    16|[Nn]ot*( )[Tt]etris|[Nn]ot*( )[Tt]etris*( )2)											cd /home/raymi/media/games/not-tetris/; love07 Not\ Tetris\ 2.love;;
+    17|[Dd]uelyst)																				duelyst 2> /dev/null;;
 esac
+
+
 echo ""

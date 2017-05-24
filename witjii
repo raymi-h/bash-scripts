@@ -1,4 +1,4 @@
-#! /usr/bin/bash
+#! /usr/bin/env bash
 
 # Whatever It Takes, Just Install It
 
@@ -46,25 +46,34 @@ packages=${packages[@]:1}
 
 if [[ $1 == -*h* || $1 != -* ]]
 then
-echo -e "\n\nWhatever It Takes, Just Install It\n\nUSAGE:\n\t\twitjii [opts] [packages]\n\ninstalls / updates [packages] using any means necesary.\n\nOPTIONS:\n\t-h\tPrints this Help message.\n\t-i\tInstall [packages]\n\t-f\tUses reFlector to renew mirrors\n\t-u\tUpdate all packages on the system.\n\t-c\tForCefully synC the package database\n\t-k\tRefresh PGP Keys\n"
+    echo -e "\n\nWhatever It Takes, Just Install It\n\nUSAGE:\n\t\twitjii [opts] [packages]\n\ninstalls / updates [packages] using any means necesary.\n\nOPTIONS:\n\t-h\tPrints this Help message.\n\t-i\tInstall [packages]\n\t-f\tUses reFlector to renew mirrors\n\t-u\tUpdate all packages on the system.\n\t-c\tForCefully synC the package database\n\t-k\tRefresh PGP Keys\n"
 fi 
+
 
 if [[ $1 == -*f* ]]
 then
 	update-the-mirrors
 fi
+
+
 if [[ $1 == -*k* ]]
 then
 	refresh-the-keys
 fi
+
+
 if [[ $1 == -*c* ]]
 then
 	force-database-sync
 fi
+
+
 if [[ $1 == -*u* ]]
 then
 	update-the-things
 fi
+
+
 if [[ $1 == -*i* ]]
 then
 	install-the-things $packages
