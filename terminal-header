@@ -1,0 +1,15 @@
+#! /usr/bin/bash
+
+echo -e "||\n||\n||\n||\n||\n||\n||\n||" > /tmp/header-sep
+echo -e "\\e[1m\\e[91m\n\\e[92m\n\\e[93m\n\\e[94m\n\\e[95m\n\\e[96m\n\\e[97m\n\\e[30m" > /tmp/header-color
+
+echo "$( greeter ), $( whoami )." > /tmp/header-right
+cal | sed "/[0-9][0-9][0-9][0-9]/ s/ 2/ 12/" >> /tmp/header-left
+date +"%a, %b %d, 1%Y %T" >> /tmp/header-right
+uptime -p >> /tmp/header-right
+wicd-cli -zi 2> /dev/null | grep "Connected to" | sed "s/(/\n/" | sed "s/)//" >> /tmp/header-right
+echo "Last system update: $( date --date="@$( cat .lastSysUpdate )" +"%d-%m-1%Y" )" >> /tmp/header-right
+echo "Disk usage: $( df --output=pcent / | tail -n 1 )" >> /tmp/header-right
+
+paste /tmp/header-left /tmp/header-sep /tmp/header-right | paste -d "" /tmp/header-color -
+rm /tmp/header-color /tmp/header-left /tmp/header-right /tmp/header-sep
