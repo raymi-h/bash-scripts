@@ -25,8 +25,13 @@ install-the-things(){
 	fi
 }
 
+remove-the-things(){
+	echo -en "\n\n--- Removing the Things! ---\n\n"
+    sudo pacman -Rsu $@
+}
+
 update-the-mirrors(){
-	echo -en "\n\n--- Updating the Mirrors!---\n\n"
+	echo -en "\n\n--- Updating the Mirrors! ---\n\n"
 	sudo reflector -c US -l 100 -f 20 --save /etc/pacman.d/mirrorlist
 }
 
@@ -46,7 +51,7 @@ packages=${packages[@]:1}
 
 if [[ $1 == -*h* || $1 != -* ]]
 then
-    echo -e "\n\nWhatever It Takes, Just Install It\n\nUSAGE:\n\t\twitjii [opts] [packages]\n\ninstalls / updates [packages] using any means necesary.\n\nOPTIONS:\n\t-h\tPrints this Help message.\n\t-i\tInstall [packages]\n\t-f\tUses reFlector to renew mirrors\n\t-u\tUpdate all packages on the system.\n\t-c\tForCefully synC the package database\n\t-k\tRefresh PGP Keys\n"
+    echo -e "\n\nWhatever It Takes, Just Install It\n\nUSAGE:\n\t\twitjii [opts] [packages]\n\ninstalls / updates [packages] using any means necesary.\n\nOPTIONS:\n\t-h\tPrints this Help message.\n\t-i\tInstall [packages]\n\t-f\tUses reFlector to renew mirrors\n\t-u\tUpdate all packages on the system.\n\t-c\tForCefully synC the package database\n\t-k\tRefresh PGP Keys\n\t-r\tRemove [packages]"
 fi 
 
 
@@ -65,6 +70,12 @@ fi
 if [[ $1 == -*c* ]]
 then
 	force-database-sync
+fi
+
+
+if [[ $1 == -*r* ]]
+then
+    remove-the-things $packages
 fi
 
 

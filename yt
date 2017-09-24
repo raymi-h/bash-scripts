@@ -10,9 +10,9 @@ playVid(){
     elif [[ $1 == *crunchyroll* ]]
     then
         echo "detected anime"
-        mpv --buffer-size 4096 --pause --sid=auto --slang=eng,en --loop=inf "$1"
+        mpv --cache-secs 60 --ytdl-raw-options buffer-size=4096 --pause --sid=auto --slang=eng,en --loop=inf "$1"
     else
-        mpv --ytdl-format=best[height=720] --ytdl-raw-options buffer-size=4096 --pause --loop=inf "$1" 
+        mpv --cache-secs 60 --ytdl-format=best[height=720] --ytdl-raw-options buffer-size=4096 --pause --loop=inf "$1" 
     fi
 
 }
